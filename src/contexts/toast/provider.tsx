@@ -48,7 +48,14 @@ export const ToastProvider = ({ children }: ToastProviderProps) => {
         clear: clearToasts,
       }}
     >
-      <Toaster position="bottom-center" richColors closeButton />
+      <Toaster
+        position="bottom-right"
+        richColors
+        theme="dark"
+        toastOptions={{
+          className: 'font-medium',
+        }}
+      />
       {children}
     </ToastContext.Provider>
   )
