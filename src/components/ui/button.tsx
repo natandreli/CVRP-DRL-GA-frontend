@@ -51,13 +51,11 @@ export const Button = ({
         sizeClasses,
         disabled && 'cursor-default opacity-50',
         variant === 'alt' &&
-          'border border-slate-300 bg-white text-slate-700 hover:bg-slate-50 disabled:hover:bg-white dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700',
-        variant === 'error' &&
-          'bg-rose-600 text-white hover:bg-rose-500 disabled:hover:bg-rose-600',
+          'border border-slate-300 bg-white text-slate-700 hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700',
+        variant === 'error' && 'bg-rose-600 text-white hover:bg-rose-500',
         variant === 'grey' &&
-          'border border-slate-200 bg-slate-100 text-slate-700 hover:bg-slate-200 disabled:text-slate-400 disabled:hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700',
-        variant === 'success' &&
-          'bg-emerald-600 text-emerald-50 hover:bg-emerald-500 disabled:hover:bg-emerald-600',
+          'border border-slate-200 bg-slate-100 text-slate-700 hover:bg-slate-200 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700',
+        variant === 'success' && 'bg-emerald-600 text-emerald-50 hover:bg-emerald-500',
         className
       )}
     >
