@@ -12,27 +12,20 @@ export interface CVRPInstance {
 }
 
 export interface GenerateRandomInstanceRequest {
-  name: string
-  description?: string
   num_customers: number
-  vehicle_capacity: number
-  max_vehicles?: number
   grid_size: number
-  demand_min: number
-  demand_max: number
+  vehicle_capacity: number
+  min_customer_demand: number
+  max_customer_demand: number
   seed?: number
 }
 
 export interface GenerateClusteredInstanceRequest {
-  name: string
-  description?: string
   num_customers: number
-  vehicle_capacity: number
-  max_vehicles?: number
   grid_size: number
-  demand_min: number
-  demand_max: number
+  vehicle_capacity: number
+  min_customer_demand: number
+  max_customer_demand: number
   num_clusters: number
-  cluster_std: number
   seed?: number
 }
