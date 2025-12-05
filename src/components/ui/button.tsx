@@ -47,14 +47,14 @@ export const Button = ({
       whileTap={{ scale: disabled ? 1 : 0.95 }}
       {...props}
       className={cn(
-        'inline-flex cursor-pointer items-center justify-center gap-2 rounded bg-slate-800 font-semibold text-slate-100 transition-all hover:bg-slate-700 disabled:cursor-default disabled:opacity-50 disabled:hover:bg-slate-800',
+        'inline-flex cursor-pointer items-center justify-center gap-2 rounded rounded-lg bg-slate-800 font-semibold text-slate-100 transition-all hover:bg-slate-700 disabled:cursor-default disabled:opacity-50 disabled:hover:bg-slate-800',
         sizeClasses,
         disabled && 'cursor-default opacity-50',
         variant === 'alt' &&
-          'border border-slate-300 bg-white text-slate-700 hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700',
+          'no-disabled:border border-slate-300 bg-white text-slate-700 hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700',
         variant === 'error' && 'bg-rose-600 text-white hover:bg-rose-500',
         variant === 'grey' &&
-          'border border-slate-200 bg-slate-100 text-slate-700 hover:bg-slate-200 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700',
+          'no-disabled:border border-slate-200 bg-slate-100 text-slate-700 hover:bg-slate-200 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700',
         variant === 'success' && 'bg-emerald-600 text-emerald-50 hover:bg-emerald-500',
         className
       )}
