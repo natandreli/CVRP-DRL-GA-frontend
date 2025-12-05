@@ -18,7 +18,7 @@ export const HomePage = () => {
       <section className="py-8 text-center">
         <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/50 px-4 py-1.5 text-sm font-medium text-slate-700 shadow-sm backdrop-blur-sm transition-all hover:shadow-md dark:border-slate-700 dark:bg-slate-900/50 dark:text-slate-300">
           <IconSparkles className="h-4 w-4 text-violet-600 dark:text-violet-400" />
-          Hybrid Learnheuristics: DRL + GA
+          Hybrid Learnheuristics: DRL+GA
         </div>
         <h1 className="mb-3 bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 bg-clip-text text-3xl font-bold text-transparent dark:from-slate-100 dark:via-slate-200 dark:to-slate-100">
           CVRP NeuroGen Solver
@@ -128,7 +128,7 @@ export const HomePage = () => {
                 Intelligent Initialization (Solving the Cold Start)
               </h4>
               <p className="text-sm leading-relaxed text-slate-400">
-                Traditional Genetic Algorithms often struggle with a "Cold Start," wasting
+                Traditional Genetic Algorithms often struggle with a "Cold Start", wasting
                 computational resources evolving from a random, low-quality initial population.
               </p>
               <p className="mt-2 text-sm leading-relaxed text-slate-400">
