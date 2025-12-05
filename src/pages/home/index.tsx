@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query'
 import { getModels } from '@/services/api/drl'
 import { ModelCard } from '@/components/features/model-card'
 import { Button } from '@/components/ui/button'
-import { IconChartBar, IconDatabase, IconUpload, IconSparkles } from '@tabler/icons-react'
+import { IconChartBar, IconDatabase, IconSparkles } from '@tabler/icons-react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 
 export const HomePage = () => {
@@ -13,7 +13,7 @@ export const HomePage = () => {
   })
 
   return (
-    <div className="space-y-12 pb-12">
+    <div className="space-y-8 pb-12">
       {/* Hero Section */}
       <section className="py-8 text-center">
         <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/50 px-4 py-1.5 text-sm font-medium text-slate-700 shadow-sm backdrop-blur-sm transition-all hover:shadow-md dark:border-slate-700 dark:bg-slate-900/50 dark:text-slate-300">
@@ -56,40 +56,40 @@ export const HomePage = () => {
           </Card>
 
           <Card className="group relative flex flex-col overflow-hidden border-slate-700/50 bg-slate-800/80 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-slate-900/50">
-            <div className="absolute top-0 right-0 h-20 w-20 translate-x-6 -translate-y-6 rounded-full bg-emerald-500/10 blur-xl" />
+            <div className="absolute top-0 right-0 h-20 w-20 translate-x-6 -translate-y-6 rounded-full bg-violet-500/10 blur-xl" />
             <CardHeader className="relative">
-              <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-lg bg-gradient-to-br from-emerald-600 to-emerald-700 shadow-lg transition-transform group-hover:scale-110">
-                <IconDatabase className="h-5 w-5 text-emerald-50" />
+              <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-lg bg-gradient-to-br from-violet-600 to-violet-700 shadow-lg transition-transform group-hover:scale-110">
+                <IconDatabase className="h-5 w-5 text-violet-50" />
               </div>
-              <CardTitle className="text-base text-slate-50">Generate Instance</CardTitle>
+              <CardTitle className="text-base text-slate-50">Generate Random</CardTitle>
               <CardDescription className="text-sm text-slate-400">
-                Create a personalized CVRP instance
+                Create a CVRP instance with randomly distributed customers
               </CardDescription>
             </CardHeader>
             <CardContent className="relative mt-auto">
-              <Link to="/instances?action=generate">
+              <Link to="/instances?tab=generate-random">
                 <Button variant="alt" className="w-full">
-                  Generate New
+                  Generate Random
                 </Button>
               </Link>
             </CardContent>
           </Card>
 
           <Card className="group relative flex flex-col overflow-hidden border-slate-700/50 bg-slate-800/80 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-slate-900/50">
-            <div className="absolute top-0 right-0 h-20 w-20 translate-x-6 -translate-y-6 rounded-full bg-violet-500/10 blur-xl" />
+            <div className="absolute top-0 right-0 h-20 w-20 translate-x-6 -translate-y-6 rounded-full bg-emerald-500/10 blur-xl" />
             <CardHeader className="relative">
-              <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-lg bg-gradient-to-br from-violet-600 to-violet-700 shadow-lg transition-transform group-hover:scale-110">
-                <IconUpload className="h-5 w-5 text-violet-50" />
+              <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-lg bg-gradient-to-br from-emerald-600 to-emerald-700 shadow-lg transition-transform group-hover:scale-110">
+                <IconDatabase className="h-5 w-5 text-emerald-50" />
               </div>
-              <CardTitle className="text-base text-slate-50">Load Benchmark</CardTitle>
+              <CardTitle className="text-base text-slate-50">Generate Clustered</CardTitle>
               <CardDescription className="text-sm text-slate-400">
-                Upload an instance from file
+                Create a CVRP instance with customers grouped in clusters
               </CardDescription>
             </CardHeader>
             <CardContent className="relative mt-auto">
-              <Link to="/instances?action=upload">
+              <Link to="/instances?tab=generate-clustered">
                 <Button variant="alt" className="w-full">
-                  Upload File
+                  Generate Clustered
                 </Button>
               </Link>
             </CardContent>
@@ -119,9 +119,9 @@ export const HomePage = () => {
         </h2>
         <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
           <Card className="group relative overflow-hidden border-slate-700/50 bg-slate-800/80 backdrop-blur-sm transition-all hover:-translate-y-1 hover:shadow-lg hover:shadow-slate-900/50">
-            <div className="absolute top-0 right-0 h-24 w-24 translate-x-8 -translate-y-8 rounded-full bg-emerald-500/10 blur-xl" />
+            <div className="absolute top-0 right-0 h-24 w-24 translate-x-8 -translate-y-8 rounded-full bg-violet-500/10 blur-xl" />
             <CardContent className="relative p-6">
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg border border-emerald-800/50 bg-emerald-950/40 text-emerald-400 transition-transform group-hover:scale-110">
+              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg border border-violet-800/50 bg-violet-950/40 text-violet-400 transition-transform group-hover:scale-110">
                 <span className="text-xl font-bold">1</span>
               </div>
               <h4 className="mb-3 text-base font-semibold text-slate-50">
@@ -139,9 +139,9 @@ export const HomePage = () => {
           </Card>
 
           <Card className="group relative overflow-hidden border-slate-700/50 bg-slate-800/80 backdrop-blur-sm transition-all hover:-translate-y-1 hover:shadow-lg hover:shadow-slate-900/50">
-            <div className="absolute top-0 right-0 h-24 w-24 translate-x-8 -translate-y-8 rounded-full bg-sky-500/10 blur-xl" />
+            <div className="absolute top-0 right-0 h-24 w-24 translate-x-8 -translate-y-8 rounded-full bg-emerald-500/10 blur-xl" />
             <CardContent className="relative p-6">
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg border border-sky-800/50 bg-sky-950/40 text-sky-400 transition-transform group-hover:scale-110">
+              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg border border-emerald-800/50 bg-emerald-950/40 text-emerald-400 transition-transform group-hover:scale-110">
                 <span className="text-xl font-bold">2</span>
               </div>
               <h4 className="mb-3 text-base font-semibold text-slate-50">
@@ -158,9 +158,9 @@ export const HomePage = () => {
           </Card>
 
           <Card className="group relative overflow-hidden border-slate-700/50 bg-slate-800/80 backdrop-blur-sm transition-all hover:-translate-y-1 hover:shadow-lg hover:shadow-slate-900/50">
-            <div className="absolute top-0 right-0 h-24 w-24 translate-x-8 -translate-y-8 rounded-full bg-violet-500/10 blur-xl" />
+            <div className="absolute top-0 right-0 h-24 w-24 translate-x-8 -translate-y-8 rounded-full bg-sky-500/10 blur-xl" />
             <CardContent className="relative p-6">
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg border border-violet-800/50 bg-violet-950/40 text-violet-400 transition-transform group-hover:scale-110">
+              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg border border-sky-800/50 bg-sky-950/40 text-sky-400 transition-transform group-hover:scale-110">
                 <span className="text-xl font-bold">3</span>
               </div>
               <h4 className="mb-3 text-base font-semibold text-slate-50">
