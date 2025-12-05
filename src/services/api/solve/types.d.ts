@@ -1,14 +1,22 @@
 import type { Solution } from '@/services/types'
 
+export interface GAConfig {
+  population_size: number
+  generations: number
+  crossover_rate: number
+  mutation_rate: number
+  selection_method: 'tournament' | 'roulette'
+  tournament_size: number
+  elitism_count: number
+  crossover_method: 'ox' | 'pmx' | 'edge'
+  mutation_method: 'swap' | 'insert' | 'inversion' | '2opt'
+  seed?: number | null
+}
+
 export interface ComparisonRequest {
   instance_id: string
-  model_id: string
-  population_size: number
-  num_generations: number
-  mutation_rate: number
-  crossover_rate: number
-  tournament_size: number
-  elite_size: number
+  drl_model_id: string
+  ga_config: GAConfig
 }
 
 export interface AlgorithmResult {
@@ -16,6 +24,7 @@ export interface AlgorithmResult {
   initial_fitness: number
   final_solution: Solution
   computation_time: number
+  convergence_history?: Array<{ generation: number; fitness: number }>
 }
 
 export interface ComparisonMetrics {
