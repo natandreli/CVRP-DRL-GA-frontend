@@ -127,3 +127,39 @@ input[type='color']::-webkit-color-swatch {
 .animation-delay-4000 {
   animation-delay: 4s;
 }
+
+/* Custom Scrollbar Styles */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(71, 85, 105, 0.5) oklch(20.8% 0.042 265.755);
+}
+
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.3);
+  border-radius: 5px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: rgba(71, 85, 105, 0.5);
+  border-radius: 5px;
+  border: 2px solid rgba(15, 23, 42, 0.3);
+  transition: background-color 0.2s;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(71, 85, 105, 0.7);
+}
+
+*::-webkit-scrollbar-thumb:active {
+  background-color: rgba(71, 85, 105, 0.9);
+}
+
+html::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track {
+  background: #0f172a;
+}
