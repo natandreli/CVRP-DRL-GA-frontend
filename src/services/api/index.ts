@@ -4,6 +4,7 @@ import qs from 'qs'
 
 export const apiFetcher = axios.create({
   baseURL: API_URL + '/api',
+  withCredentials: true,
   paramsSerializer: (params) => qs.stringify(params, { arrayFormat: 'repeat' }),
 })
 
