@@ -1,25 +1,34 @@
 import { useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
+import { useSearchParams } from 'react-router-dom'
 import { getAllInstances } from '@/services/api/instances'
 import { IconPlus, IconMapPin, IconPackage } from '@tabler/icons-react'
 import { InstancesList } from '@/components/features/instances/instances-list'
 import { GenerateRandomForm } from '@/components/features/instances/generate-random-form'
 import { GenerateClusteredForm } from '@/components/features/instances/generate-clustered-form'
-//
 
 type TabType = 'list' | 'generate-random' | 'generate-clustered' //| 'upload'
 
 export const InstancesPage = () => {
-  const [activeTab, setActiveTab] = useState<TabType>('list')
+  const [searchParams] = useSearchParams()
 
-  // Fetch all instances
+  const getInitialTab = (): TabType => {
+    const tabParam = searchParams.get('tab') as TabType | null
+    if (tabParam && ['list', 'generate-random', 'generate-clustered'].includes(tabParam)) {
+      return tabParam
+    }
+    return 'list'
+  }
+
+  const [activeTab, setActiveTab] = useState<TabType>(getInitialTab)
+
   const { data: instances, isLoading } = useQuery({
     queryKey: ['instances'],
     queryFn: getAllInstances,
   })
 
   return (
-    <div className="space-y-6 pb-12">
+    <div className="space-y-8 pb-12">
       {/* Header */}
       <div className="py-8 text-center">
         <h1 className="mb-2 text-2xl font-semibold text-slate-900 dark:text-slate-100">
@@ -76,7 +85,8 @@ export const InstancesPage = () => {
           Upload File
         </button> */}
       </div>
-      Tab Content
+
+      {/* Tab Content */}
       <div>
         {activeTab === 'list' && (
           <InstancesList
