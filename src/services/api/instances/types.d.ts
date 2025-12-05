@@ -2,6 +2,7 @@ import type { Location, Customer } from '@/services/api/types'
 
 export interface CVRPInstance {
   id: string
+  type: string
   name: string
   description?: string
   depot: Location
