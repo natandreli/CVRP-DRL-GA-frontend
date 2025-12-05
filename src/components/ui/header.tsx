@@ -37,7 +37,7 @@ export const Header = () => {
                 CVRP NeuroGen
               </span>
               <p className="hidden text-xs text-slate-500 md:block dark:text-slate-400">
-                DRL + GA Hybrid Solver
+                DRL+GA Hybrid Solver
               </p>
             </div>
           </Link>
