@@ -4,6 +4,8 @@ import { generateRandomInstance } from '@/services/api/instances'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { useToast } from '@/hooks/use-toast'
+import type { CVRPInstance } from '@/services/api/instances/types'
+import { Card, CardContent } from '@/components/ui/card'
 
 type GenerateRandomFormProps = {
   onSuccess: () => void
@@ -24,8 +26,12 @@ export const GenerateRandomForm = ({ onSuccess }: GenerateRandomFormProps) => {
 
   const generateMutation = useMutation({
     mutationFn: generateRandomInstance,
-    onSuccess: () => {
-      toast.success('Random instance generated successfully')
+    onSuccess: (instance: CVRPInstance) => {
+      toast.success(
+        <span>
+          Random instance <strong>{instance.id}</strong> generated successfully
+        </span>
+      )
       queryClient.invalidateQueries({ queryKey: ['instances'] })
       onSuccess()
     },
@@ -87,76 +93,82 @@ export const GenerateRandomForm = ({ onSuccess }: GenerateRandomFormProps) => {
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-6">
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-          <Input
-            label="Number of Customers"
-            type="number"
-            min={1}
-            value={formData.num_customers}
-            setValue={(value) => setFormData({ ...formData, num_customers: value })}
-            required
-            containerProps={{
-              className: 'w-full',
-            }}
-          />
-          <Input
-            label="Grid Size"
-            type="number"
-            min={1}
-            value={formData.grid_size}
-            setValue={(value) => setFormData({ ...formData, grid_size: value })}
-            required
-            containerProps={{
-              className: 'w-full',
-            }}
-          />
-          <Input
-            label="Minimum Customer Demand"
-            type="number"
-            min={1}
-            value={formData.min_customer_demand}
-            setValue={(value) => setFormData({ ...formData, min_customer_demand: value })}
-            required
-            containerProps={{
-              className: 'w-full',
-            }}
-          />
-          <Input
-            label="Maximum Customer Demand"
-            type="number"
-            min={1}
-            value={formData.max_customer_demand}
-            setValue={(value) => setFormData({ ...formData, max_customer_demand: value })}
-            required
-            containerProps={{
-              className: 'w-full',
-            }}
-          />
-          <Input
-            label="Vehicle Capacity"
-            type="number"
-            min={1}
-            value={formData.vehicle_capacity}
-            setValue={(value) => setFormData({ ...formData, vehicle_capacity: value })}
-            required
-            containerProps={{
-              className: 'w-full',
-            }}
-          />
-          <Input
-            label="Random Seed"
-            type="number"
-            value={formData.seed}
-            setValue={(value) => setFormData({ ...formData, seed: value })}
-            required
-            containerProps={{
-              className: 'w-full',
-            }}
-          />
-        </div>
-
-        <div className="mt-10 flex justify-end gap-3">
-          <Button type="submit" size="md" variant="grey" isLoading={generateMutation.isPending}>
+        <Card className="relative overflow-hidden border-slate-700/50 bg-slate-800/80 backdrop-blur-sm">
+          <div className="absolute top-0 right-0 h-32 w-32 translate-x-8 -translate-y-8 rounded-full bg-sky-500/10 blur-2xl" />
+          <div className="absolute top-1/2 left-0 h-28 w-28 -translate-x-8 -translate-y-1/2 rounded-full bg-violet-500/8 blur-xl" />
+          <div className="absolute right-1/4 bottom-0 h-24 w-24 translate-y-6 rounded-full bg-emerald-500/8 blur-xl" />
+          <CardContent>
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+              <Input
+                label="Number of Customers"
+                type="number"
+                min={1}
+                value={formData.num_customers}
+                setValue={(value) => setFormData({ ...formData, num_customers: value })}
+                required
+                containerProps={{
+                  className: 'w-full',
+                }}
+              />
+              <Input
+                label="Grid Size"
+                type="number"
+                min={1}
+                value={formData.grid_size}
+                setValue={(value) => setFormData({ ...formData, grid_size: value })}
+                required
+                containerProps={{
+                  className: 'w-full',
+                }}
+              />
+              <Input
+                label="Minimum Customer Demand"
+                type="number"
+                min={1}
+                value={formData.min_customer_demand}
+                setValue={(value) => setFormData({ ...formData, min_customer_demand: value })}
+                required
+                containerProps={{
+                  className: 'w-full',
+                }}
+              />
+              <Input
+                label="Maximum Customer Demand"
+                type="number"
+                min={1}
+                value={formData.max_customer_demand}
+                setValue={(value) => setFormData({ ...formData, max_customer_demand: value })}
+                required
+                containerProps={{
+                  className: 'w-full',
+                }}
+              />
+              <Input
+                label="Vehicle Capacity"
+                type="number"
+                min={1}
+                value={formData.vehicle_capacity}
+                setValue={(value) => setFormData({ ...formData, vehicle_capacity: value })}
+                required
+                containerProps={{
+                  className: 'w-full',
+                }}
+              />
+              <Input
+                label="Random Seed"
+                type="number"
+                value={formData.seed}
+                setValue={(value) => setFormData({ ...formData, seed: value })}
+                required
+                containerProps={{
+                  className: 'w-full',
+                }}
+              />
+            </div>
+          </CardContent>
+        </Card>
+        <div className="mt-6 flex justify-end gap-3">
+          <Button type="submit" size="md" isLoading={generateMutation.isPending}>
             Generate Instance
           </Button>
         </div>
