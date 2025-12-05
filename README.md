@@ -1,74 +1,266 @@
-# React + TypeScript + Vite
+# CVRP-DRL-GA Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Modern web interface for visualizing and comparing solutions to the Capacitated Vehicle Routing Problem (CVRP) using different solving approaches.
 
-Currently, two official plugins are available:
+## 📋 Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This React-based frontend provides an intuitive interface to:
+- Create and manage CVRP instances (random, clustered, or custom uploads)
+- Configure and run three different solving algorithms
+- Compare algorithm performance side-by-side
+- Visualize routes on interactive maps
+- Analyze convergence patterns and metrics
 
-## React Compiler
+## 🎯 Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### 🏠 Home Page
+- Welcome screen with introduction to CVRP
+- Quick access to main features
+- Algorithm selection cards (NeuroGen, Pure GA, DRL)
 
-## Expanding the ESLint configuration
+### 📦 Instance Management
+Three ways to create CVRP instances:
+1. **Random Generation**: Uniformly distributed customers
+2. **Clustered Generation**: Geographically clustered customers
+3. **File Upload**: Upload standard VRP format files
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+View, select, and delete existing instances.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### ⚖️ Algorithm Comparison
+Interactive comparison interface featuring:
+- **Side-by-side results** for two algorithms
+- **Real-time metrics**: Initial/Final fitness, vehicles used, execution time
+- **Convergence charts**: Generation-by-generation fitness evolution with hover tooltips
+- **Route visualization**: Interactive maps with zoom, pan, and reset controls
+- **Route details**: Expandable list showing customer sequences and demands
+- **Winner indication**: Automatic highlighting of best-performing algorithm
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### 🎨 Modern UI/UX
+- Dark theme optimized for extended use
+- Smooth animations and transitions
+- Responsive design for various screen sizes
+- Custom styled scrollbars
+- Toast notifications for user feedback
+- Modal dialogs for configuration
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 🏗️ Project Structure
+
+```
+src/
+├── components/
+│   ├── features/          # Feature-specific components
+│   │   ├── comparison/    # Algorithm comparison UI
+│   │   └── instances/     # Instance management UI
+│   └── ui/                # Reusable UI components
+├── pages/                 # Page components
+│   ├── home/
+│   ├── instances/
+│   └── comparison/
+├── services/              # API client
+│   └── api/
+│       ├── drl/           # DRL endpoints
+│       ├── instances/     # Instance endpoints
+│       └── solve/         # Solving endpoints
+├── contexts/              # React context providers
+├── hooks/                 # Custom React hooks
+├── utils/                 # Utility functions
+└── layout/                # Layout components
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🚀 Getting Started
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Prerequisites
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- Node.js 18 or higher
+- npm or yarn package manager
+- Backend API running ([see backend README](https://github.com/natandreli/CVRP-DRL-GA-backend.git))
+
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/natandreli/CVRP-DRL-GA-frontend.git
+   cd CVRP-DRL-GA-frontend
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Configure API endpoint**
+   
+   Edit `src/config/index.ts` to point to your backend:
+   ```typescript
+   export const API_BASE_URL = 'http://localhost:8000'
+   ```
+
+### Running the Application
+
+**Development mode with hot reload:**
+```bash
+npm run dev
 ```
-# CVRP-DRL-GA-frontend
+
+**Build for production:**
+```bash
+npm run build
+```
+
+**Preview production build:**
+```bash
+npm run preview
+```
+
+The application will be available at `http://localhost:5173` (or the next available port)
+
+## 🧪 Development
+
+### Code Quality
+
+**Type checking:**
+```bash
+npm run type-check
+```
+
+**Linting:**
+```bash
+npm run lint
+```
+
+**Auto-fix linting issues:**
+```bash
+npm run lint:fix
+```
+
+**Format code:**
+```bash
+npm run format
+```
+
+**Run all validations:**
+```bash
+npm run validate
+```
+
+## 🎨 Styling
+
+The project uses:
+- **Tailwind CSS** - Utility-first CSS framework
+- **Custom CSS** - Global styles and animations in `globals.css`
+- **Framer Motion** - Smooth animations
+- **Custom scrollbar** - Themed scrollbars matching dark mode
+
+## 📊 Key Components
+
+### Algorithm Result Card
+Displays comprehensive results for each algorithm:
+- Metrics cards (fitness, vehicles, time)
+- Interactive route visualization with zoom/pan
+- Route details with customer sequences
+- Hover states and transitions
+
+### Convergence Chart
+Line chart showing algorithm convergence:
+- X-axis: Generation number
+- Y-axis: Fitness value
+- Hover tooltip showing generation and fitness
+- Vertical cursor line for precise tracking
+- Synchronized y-axis domains for fair comparison
+
+### Route Visualization
+SVG-based route rendering:
+- Color-coded routes per vehicle
+- Customer nodes with IDs
+- Depot highlighted in red
+- Zoom controls (in/out/reset)
+- Mouse wheel zoom support
+- Click and drag to pan
+
+### Configuration Forms
+Dynamic forms for algorithm parameters:
+- GA: population size, generations, rates
+- DRL: preset selection, population, generations
+- Real-time validation
+- Preset loading
+
+## 🛠️ Technologies
+
+- **React 19** - UI library
+- **TypeScript** - Type safety
+- **Vite** - Build tool and dev server
+- **TanStack Query** - Server state management
+- **Axios** - HTTP client
+- **React Router** - Navigation
+- **Recharts** - Data visualization
+- **Tailwind CSS** - Styling
+- **Framer Motion** - Animations
+- **Tabler Icons** - Icon library
+- **Sonner** - Toast notifications
+
+## 🎯 User Workflows
+
+### Solving a CVRP Instance
+
+1. **Navigate to Instances** page
+2. **Create or select** an instance
+3. **Go to Comparison** page
+4. **Select the instance** from dropdown
+5. **Configure algorithms** (click on algorithm cards)
+6. **Click "Run Comparison"**
+7. **Analyze results** - view metrics, charts, and routes
+8. **Compare winners** - automatic best solution highlighting
+
+### Creating an Instance
+
+**Random Generation:**
+- Set number of customers (1-200)
+- Set vehicle capacity
+- Set grid size
+
+**Clustered Generation:**
+- Set number of customers
+- Set number of clusters
+- Set vehicle capacity
+
+**Upload File:**
+- Choose VRP format file
+- File parsed automatically
+
+## 📱 Responsive Design
+
+The application adapts to different screen sizes:
+- **Desktop**: Full side-by-side comparison
+- **Tablet**: Stacked layout with preserved features
+- **Mobile**: Single column, optimized controls
+
+## 🎨 Theme
+
+Custom dark theme with:
+- **Primary**: Blue (#3f68f2)
+- **Background**: Dark blue (#090b0d)
+- **Text**: Light slate
+- **Accents**: Cyan, emerald, sky
+
+## 🐛 Known Issues
+
+- Large instances (>150 customers) may require zoom adjustment for optimal visualization
+- Route visualization performance may vary on older browsers
+
+## 🔮 Future Enhancements
+
+- Export solutions to various formats
+- Allow upload CVRP intances files
+- Batch comparison of multiple algorithms
+- Historical run comparison
+- 3D route visualization
+
+## 📄 License
+
+![License](https://img.shields.io/badge/License-MIT-yellow)
+
+## 👥 Authors
+
+Natalia Andrea García Ríos
+natalia.garcia9@udea.edu.co
+ngarciarios2001@gmail.com
