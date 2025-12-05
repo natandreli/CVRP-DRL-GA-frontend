@@ -84,13 +84,13 @@ export const Input = (props: InputProps) => {
       {props.label && (
         <label
           htmlFor={id}
-          className="block text-sm font-medium text-slate-700 dark:text-slate-300"
+          className="block text-sm font-medium text-slate-700 dark:text-slate-400"
         >
           {props.label}
-          {props.required && <span className="text-red-500"> *</span>}
+          {props.required && <span className="text-red-800"> *</span>}
         </label>
       )}
-      <div className="relative flex max-w-full flex-1 items-center rounded-lg border border-slate-300 bg-white transition-all focus-within:border-slate-400 focus-within:ring-2 focus-within:ring-slate-900/10 dark:border-slate-700 dark:bg-slate-900 dark:focus-within:ring-slate-100/10">
+      <div className="relative flex max-w-full flex-1 items-center rounded-lg border bg-white transition-all focus-within:border-slate-600/50 focus-within:ring-2 focus-within:ring-slate-900/10 dark:border-slate-700/50 dark:bg-slate-900 dark:focus-within:ring-slate-100/10">
         <input
           {...inputProps}
           placeholder={props.placeholder}
