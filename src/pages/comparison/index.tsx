@@ -81,7 +81,7 @@ export const ComparisonPage = () => {
           Algorithm Comparison
         </h1>
         <p className="text-sm text-slate-600 dark:text-slate-400">
-          Compare pure GA vs NeuroGen (DRL+GA) performance
+          Compare NeuroGen (DRL+GA) vs pure GA performance
         </p>
       </div>
 
