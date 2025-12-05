@@ -77,7 +77,7 @@ export const InstancesPage = () => {
         </button> */}
       </div>
       Tab Content
-      <div className="mt-8">
+      <div>
         {activeTab === 'list' && (
           <InstancesList
             instances={instances}
