@@ -5,6 +5,7 @@ import {
   type ReactNode,
   useId,
 } from 'react'
+import { IconChevronDown } from '@tabler/icons-react'
 import { cn } from '@/utils/cn'
 
 type InputProps = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> & {
@@ -14,6 +15,7 @@ type InputProps = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLI
   labelOffset?: number
   errorMessage?: string
   setValue?: (value: string) => void
+  isDropdown?: boolean
 }
 
 export const Input = (props: InputProps) => {
@@ -26,6 +28,7 @@ export const Input = (props: InputProps) => {
   delete inputProps.labelOffset
   delete inputProps.min
   delete inputProps.max
+  delete inputProps.isDropdown
 
   const minValue = props.min
   const maxValue = props.max
@@ -59,7 +62,8 @@ export const Input = (props: InputProps) => {
     const max = maxValue ? parseFloat(maxValue.toString()) : Infinity
     const newValue = currentValue + step
     if (newValue <= max) {
-      props.setValue?.(newValue.toString())
+      const roundedValue = Math.round(newValue * 10000) / 10000
+      props.setValue?.(roundedValue.toString())
     }
   }
 
@@ -69,7 +73,8 @@ export const Input = (props: InputProps) => {
     const min = minValue ? parseFloat(minValue.toString()) : -Infinity
     const newValue = currentValue - step
     if (newValue >= min) {
-      props.setValue?.(newValue.toString())
+      const roundedValue = Math.round(newValue * 10000) / 10000
+      props.setValue?.(roundedValue.toString())
     }
   }
 
@@ -97,8 +102,10 @@ export const Input = (props: InputProps) => {
           className={cn(
             'block w-full max-w-full bg-transparent px-4 py-2.5 text-sm text-slate-900 outline-none dark:text-slate-100',
             props.readOnly && 'cursor-default opacity-70',
+            props.isDropdown && 'cursor-pointer caret-transparent',
             props.icon ? 'cursor-pointer caret-transparent' : '',
             props.icon ? 'pl-10' : 'px-4',
+            props.isDropdown && 'pr-10',
             props.type === 'checkbox' && 'h-4 w-4 accent-slate-600',
             props.type === 'number' &&
               '[appearance:textfield] pr-16 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none',
@@ -152,6 +159,11 @@ export const Input = (props: InputProps) => {
               </svg>
             </button>
           </div>
+        )}
+        {props.isDropdown && props.type !== 'number' && (
+          <span className="pointer-events-none absolute right-4 text-slate-400 dark:text-slate-500">
+            <IconChevronDown size={20} />
+          </span>
         )}
       </div>
       {props.errorMessage && <p className="text-xs text-red-500">{props.errorMessage}</p>}
