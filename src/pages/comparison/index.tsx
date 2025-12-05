@@ -1,6 +1,6 @@
 export const ComparisonPage = () => {
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 pb-12">
       <div>
         <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
           Algorithm Comparison Dashboard
