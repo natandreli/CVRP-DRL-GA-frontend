@@ -34,9 +34,9 @@ export const CardHeader = ({
 
 export const CardTitle = ({ children, className }: { children: ReactNode; className?: string }) => {
   return (
-    <h3 className={cn('text-base font-semibold text-slate-900 dark:text-slate-100', className)}>
+    <span className={cn('text-base font-semibold text-slate-900 dark:text-slate-100', className)}>
       {children}
-    </h3>
+    </span>
   )
 }
 
