@@ -36,7 +36,7 @@ export const ModelCard = ({ modelId }: { modelId: string }) => {
   const colorClass = modelColors[model.id as keyof typeof modelColors]
 
   return (
-    <Card className="group flex h-full flex-col border-slate-200 bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:border-slate-800 dark:bg-slate-900">
+    <Card className="group flex h-full flex-col border-slate-200 bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-slate-900/50 dark:border-slate-800 dark:bg-slate-900">
       <CardHeader className="flex-shrink-0">
         <div className="mb-3 flex items-center justify-between gap-3">
           <div
