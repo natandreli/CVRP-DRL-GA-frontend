@@ -40,14 +40,24 @@ export const Input = (props: InputProps) => {
     const value = event.target.value
 
     if (props.type === 'number') {
-      if (value === '-' || value === '') {
+      if (value === '') {
+        if (!props.required) {
+          props.setValue?.(value)
+          props.onChange?.(event)
+        }
+        return
+      }
+
+      const min = minValue !== undefined ? parseFloat(minValue.toString()) : -Infinity
+      const max = maxValue !== undefined ? parseFloat(maxValue.toString()) : Infinity
+
+      if (value === '-' || (value.startsWith('-') && min >= 0)) {
         return
       }
 
       const numValue = parseFloat(value)
-      const min = minValue ? parseFloat(minValue.toString()) : -Infinity
 
-      if (isNaN(numValue) || numValue < min) {
+      if (isNaN(numValue) || numValue < min || numValue > max) {
         return
       }
     }
@@ -59,7 +69,7 @@ export const Input = (props: InputProps) => {
   const handleIncrement = () => {
     const currentValue = parseFloat(props.value?.toString() || '0')
     const step = parseFloat(props.step?.toString() || '1')
-    const max = maxValue ? parseFloat(maxValue.toString()) : Infinity
+    const max = maxValue !== undefined ? parseFloat(maxValue.toString()) : Infinity
     const newValue = currentValue + step
     if (newValue <= max) {
       const roundedValue = Math.round(newValue * 10000) / 10000
@@ -70,18 +80,25 @@ export const Input = (props: InputProps) => {
   const handleDecrement = () => {
     const currentValue = parseFloat(props.value?.toString() || '0')
     const step = parseFloat(props.step?.toString() || '1')
-    const min = minValue ? parseFloat(minValue.toString()) : -Infinity
+    const min = minValue !== undefined ? parseFloat(minValue.toString()) : -Infinity
     const newValue = currentValue - step
-    if (newValue >= min) {
-      const roundedValue = Math.round(newValue * 10000) / 10000
+
+    if (newValue < min) {
+      return
+    }
+
+    const roundedValue = Math.round(newValue * 10000) / 10000
+
+    if (roundedValue >= min) {
       props.setValue?.(roundedValue.toString())
     }
   }
 
   const currentValue = parseFloat(props.value?.toString() || '0')
-  const min = minValue ? parseFloat(minValue.toString()) : -Infinity
-  const max = maxValue ? parseFloat(maxValue.toString()) : Infinity
-  const isDecrementDisabled = currentValue <= min
+  const min = minValue !== undefined ? parseFloat(minValue.toString()) : -Infinity
+  const max = maxValue !== undefined ? parseFloat(maxValue.toString()) : Infinity
+  const isDecrementDisabled =
+    currentValue <= min || currentValue - parseFloat(props.step?.toString() || '1') < min
   const isIncrementDisabled = currentValue >= max
 
   return (
@@ -102,6 +119,7 @@ export const Input = (props: InputProps) => {
           className={cn(
             'block w-full max-w-full bg-transparent px-4 py-2.5 text-sm text-slate-900 outline-none dark:text-slate-100',
             props.readOnly && 'cursor-default opacity-70',
+            props.disabled && 'cursor-not-allowed opacity-50',
             props.isDropdown && 'cursor-pointer caret-transparent',
             props.icon ? 'cursor-pointer caret-transparent' : '',
             props.icon ? 'pl-10' : 'px-4',
@@ -116,15 +134,15 @@ export const Input = (props: InputProps) => {
           onChange={handleOnChange}
         />
         {props.icon && <div className="absolute left-3 text-slate-400">{props.icon}</div>}
-        {props.type === 'number' && props.setValue && (
+        {props.type === 'number' && props.setValue && !props.disabled && (
           <div className="gap-0.1 absolute right-2 mr-1 flex flex-col">
             <button
               type="button"
               onClick={handleIncrement}
-              disabled={isIncrementDisabled}
+              disabled={isIncrementDisabled || props.disabled}
               className={cn(
                 'flex items-center justify-center transition-colors',
-                isIncrementDisabled
+                isIncrementDisabled || props.disabled
                   ? 'cursor-not-allowed text-slate-400 dark:text-slate-600'
                   : 'cursor-pointer text-slate-600 hover:text-slate-100 dark:text-slate-300 dark:hover:text-slate-100'
               )}
@@ -141,10 +159,10 @@ export const Input = (props: InputProps) => {
             <button
               type="button"
               onClick={handleDecrement}
-              disabled={isDecrementDisabled}
+              disabled={isDecrementDisabled || props.disabled}
               className={cn(
                 'flex items-center justify-center transition-colors',
-                isDecrementDisabled
+                isDecrementDisabled || props.disabled
                   ? 'cursor-not-allowed text-slate-400 dark:text-slate-600'
                   : 'cursor-pointer text-slate-600 hover:text-slate-100 dark:text-slate-300 dark:hover:text-slate-100'
               )}
