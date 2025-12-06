@@ -39,14 +39,27 @@ export const Select = ({
 
   const selectedOption = options.find((opt) => opt.value === value)
 
-  useEffect(() => {
-    if (open && triggerRef.current) {
+  const updatePosition = () => {
+    if (triggerRef.current) {
       const rect = triggerRef.current.getBoundingClientRect()
       setPosition({
-        top: rect.bottom + window.scrollY + 8,
-        left: rect.left + window.scrollX,
+        top: rect.bottom + 8,
+        left: rect.left,
         width: rect.width,
       })
+    }
+  }
+
+  useEffect(() => {
+    if (open) {
+      updatePosition()
+      window.addEventListener('scroll', updatePosition, true)
+      window.addEventListener('resize', updatePosition)
+
+      return () => {
+        window.removeEventListener('scroll', updatePosition, true)
+        window.removeEventListener('resize', updatePosition)
+      }
     }
   }, [open])
 
@@ -111,7 +124,7 @@ export const Select = ({
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95, y: -10 }}
                 transition={{ duration: 0.15 }}
-                className="fixed z-[9999] max-h-80 overflow-auto rounded-lg border border-slate-700/50 bg-slate-900 shadow-xl"
+                className="fixed z-[99999] max-h-80 overflow-auto rounded-lg border border-slate-700/50 bg-slate-900 shadow-xl"
                 style={{
                   top: `${position.top}px`,
                   left: `${position.left}px`,
