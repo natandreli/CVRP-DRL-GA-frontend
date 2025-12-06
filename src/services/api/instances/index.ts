@@ -56,6 +56,16 @@ export async function uploadInstance(file: File): Promise<CVRPInstance> {
 }
 
 /**
+ * Get a specific instance by ID
+ * @param instanceId The ID of the instance to get.
+ * @return The CVRP instance.
+ */
+export async function getInstance(instanceId: string): Promise<CVRPInstance> {
+  const res = await apiFetcher.get(`/instances/${instanceId}`)
+  return res.data
+}
+
+/**
  * Delete an instance
  * @param instanceId The ID of the instance to delete.
  */
