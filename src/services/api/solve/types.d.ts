@@ -24,6 +24,8 @@ export interface AlgorithmResult {
   initial_fitness: number
   final_solution: Solution
   computation_time: number
+  population_generation_time: number
+  ga_convergence_time: number
   convergence_history?: Array<{ generation: number; fitness: number }>
 }
 
