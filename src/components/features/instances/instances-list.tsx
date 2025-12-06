@@ -66,8 +66,14 @@ export const InstancesList = ({
 
   if (isLoading) {
     return (
-      <div className="py-12 text-center text-slate-600 dark:text-slate-400">
-        Loading instances...
+      <div className="flex flex-col items-center justify-center py-16">
+        <div className="relative">
+          <div className="h-10 w-10 rounded-full border-4 border-slate-200 dark:border-slate-800"></div>
+          <div className="absolute top-0 left-0 h-10 w-10 animate-spin rounded-full border-4 border-transparent border-t-sky-500"></div>
+        </div>
+        <p className="mt-6 text-sm font-medium text-slate-600 dark:text-slate-400">
+          Loading instances...
+        </p>
       </div>
     )
   }
