@@ -1,4 +1,4 @@
-import { deleteInstance } from '@/services/api/instances'
+import { deleteInstance, getInstance } from '@/services/api/instances'
 import type { CVRPInstance } from '@/services/api/instances/types'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { IconTrash, IconPackage } from '@tabler/icons-react'
@@ -6,6 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button'
 import { useModal } from '@/hooks/use-modal'
 import { useToast } from '@/hooks/use-toast'
+import { InstanceDetailsModal } from '@/components/features/instances/modals/instance-details-modal'
 
 type InstancesListProps = {
   instances: CVRPInstance[] | undefined
@@ -35,15 +36,24 @@ export const InstancesList = ({
     },
   })
 
-  const handleDelete = (instanceId: string, instanceName: string) => {
+  const handleViewDetails = async (instanceId: string) => {
+    try {
+      const instance = await getInstance(instanceId)
+      modal.open(<InstanceDetailsModal instance={instance} />)
+    } catch {
+      toast.error('Failed to load instance details')
+    }
+  }
+
+  const handleDelete = (instanceId: string) => {
     modal.open(
       <div className="space-y-4">
         <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-100">
           Delete Instance
         </h3>
         <p className="text-sm text-slate-600 dark:text-slate-400">
-          Are you sure you want to delete <strong>{instanceName}</strong>? This action cannot be
-          undone.
+          Are you sure you want to delete <strong>{instanceId}</strong> instance? This action cannot
+          be undone.
         </p>
         <div className="flex justify-end gap-3">
           <Button variant="grey" onClick={() => modal.close()}>
@@ -108,7 +118,8 @@ export const InstancesList = ({
   const renderInstanceCard = (instance: CVRPInstance) => (
     <Card
       key={instance.id}
-      className="group relative overflow-hidden border-slate-700/50 bg-slate-800/80 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-slate-900/50"
+      className="group relative cursor-pointer overflow-hidden border-slate-700/50 bg-slate-800/80 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-slate-900/50"
+      onClick={() => handleViewDetails(instance.id)}
     >
       <div className="absolute top-0 right-0 h-24 w-24 translate-x-6 -translate-y-6 rounded-full bg-sky-500/10 blur-xl" />
       <CardHeader className="relative pb-3">
@@ -123,7 +134,10 @@ export const InstancesList = ({
           </div>
           {instance.type !== 'preset' && (
             <button
-              onClick={() => handleDelete(instance.id, instance.name)}
+              onClick={(e) => {
+                e.stopPropagation()
+                handleDelete(instance.id)
+              }}
               className="flex-shrink-0 rounded-lg p-2 text-slate-500 transition-all hover:scale-110 hover:bg-red-950/50 hover:text-red-400"
               aria-label="Delete instance"
             >
