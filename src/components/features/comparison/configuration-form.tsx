@@ -114,6 +114,7 @@ export const ConfigurationForm = ({
                     Genetic Algorithm Parameters
                   </span>
 
+                  {/* Basic Parameters */}
                   <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
                     <Input
                       required
@@ -136,49 +137,171 @@ export const ConfigurationForm = ({
                       }
                     />
                     <Input
-                      required
-                      label="Mutation Rate"
+                      label="Seed"
                       type="number"
-                      min={0}
-                      max={1}
-                      step={0.05}
-                      value={gaConfig.mutation_rate.toString()}
+                      placeholder="Leave empty for random"
+                      value={gaConfig.seed?.toString() || ''}
                       setValue={(value) =>
-                        onGAConfigChange({ ...gaConfig, mutation_rate: parseFloat(value) })
+                        onGAConfigChange({
+                          ...gaConfig,
+                          seed: value === '' ? null : parseInt(value),
+                        })
                       }
                     />
-                    <Input
-                      required
-                      label="Crossover Rate"
-                      type="number"
-                      min={0}
-                      max={1}
-                      step={0.05}
-                      value={gaConfig.crossover_rate.toString()}
-                      setValue={(value) =>
-                        onGAConfigChange({ ...gaConfig, crossover_rate: parseFloat(value) })
-                      }
-                    />
-                    <Input
-                      required
-                      label="Tournament Size"
-                      type="number"
-                      min={2}
-                      value={gaConfig.tournament_size.toString()}
-                      setValue={(value) =>
-                        onGAConfigChange({ ...gaConfig, tournament_size: parseInt(value) })
-                      }
-                    />
-                    <Input
-                      required
-                      label="Elitism Count"
-                      type="number"
-                      min={1}
-                      value={gaConfig.elitism_count.toString()}
-                      setValue={(value) =>
-                        onGAConfigChange({ ...gaConfig, elitism_count: parseInt(value) })
-                      }
-                    />
+                  </div>
+
+                  {/* Genetic Operators */}
+                  <div className="space-y-4">
+                    <span className="block text-sm font-medium text-slate-400">
+                      Genetic Operators
+                    </span>
+                    <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+                      <Select
+                        label="Selection Method"
+                        value={gaConfig.selection_method}
+                        options={[
+                          {
+                            value: 'tournament',
+                            label: 'Tournament',
+                            subtitle: 'Selects best from random sample',
+                          },
+                          {
+                            value: 'roulette',
+                            label: 'Roulette',
+                            subtitle: 'Fitness proportional selection',
+                          },
+                        ]}
+                        onChange={(value) =>
+                          onGAConfigChange({
+                            ...gaConfig,
+                            selection_method: value as 'tournament' | 'roulette',
+                          })
+                        }
+                        required
+                      />
+                      <Select
+                        label="Crossover Method"
+                        value={gaConfig.crossover_method}
+                        options={[
+                          {
+                            value: 'ox',
+                            label: 'OX (Order Crossover)',
+                            subtitle: 'Preserves relative order',
+                          },
+                          {
+                            value: 'pmx',
+                            label: 'PMX (Partially Mapped)',
+                            subtitle: 'Partial mapping crossover',
+                          },
+                          {
+                            value: 'edge',
+                            label: 'Edge Crossover',
+                            subtitle: 'Edge-based recombination',
+                          },
+                        ]}
+                        onChange={(value) =>
+                          onGAConfigChange({
+                            ...gaConfig,
+                            crossover_method: value as 'ox' | 'pmx' | 'edge',
+                          })
+                        }
+                        required
+                      />
+                      <Select
+                        label="Mutation Method"
+                        value={gaConfig.mutation_method}
+                        options={[
+                          {
+                            value: 'swap',
+                            label: 'Swap',
+                            subtitle: 'Interchange two customers',
+                          },
+                          {
+                            value: 'insert',
+                            label: 'Insert',
+                            subtitle: 'Move customer to new position',
+                          },
+                          {
+                            value: 'inversion',
+                            label: 'Inversion',
+                            subtitle: 'Reverse segment order',
+                          },
+                          {
+                            value: '2opt',
+                            label: '2-opt',
+                            subtitle: 'Remove crossings in route',
+                          },
+                        ]}
+                        onChange={(value) =>
+                          onGAConfigChange({
+                            ...gaConfig,
+                            mutation_method: value as 'swap' | 'insert' | 'inversion' | '2opt',
+                          })
+                        }
+                        required
+                      />
+                    </div>
+                  </div>
+
+                  {/* Rates and Elitism */}
+                  <div className="space-y-4">
+                    <span className="block text-sm font-medium text-slate-400">
+                      Rates & Elitism
+                    </span>
+                    <div
+                      className={`grid gap-4 ${
+                        gaConfig.selection_method === 'tournament'
+                          ? 'grid-cols-2 md:grid-cols-4'
+                          : 'grid-cols-3'
+                      }`}
+                    >
+                      <Input
+                        required
+                        label="Crossover Rate"
+                        type="number"
+                        min={0}
+                        max={1}
+                        step={0.05}
+                        value={gaConfig.crossover_rate.toString()}
+                        setValue={(value) =>
+                          onGAConfigChange({ ...gaConfig, crossover_rate: parseFloat(value) })
+                        }
+                      />
+                      <Input
+                        required
+                        label="Mutation Rate"
+                        type="number"
+                        min={0}
+                        max={1}
+                        step={0.05}
+                        value={gaConfig.mutation_rate.toString()}
+                        setValue={(value) =>
+                          onGAConfigChange({ ...gaConfig, mutation_rate: parseFloat(value) })
+                        }
+                      />
+                      {gaConfig.selection_method === 'tournament' && (
+                        <Input
+                          required
+                          label="Tournament Size"
+                          type="number"
+                          min={2}
+                          value={gaConfig.tournament_size.toString()}
+                          setValue={(value) =>
+                            onGAConfigChange({ ...gaConfig, tournament_size: parseInt(value) })
+                          }
+                        />
+                      )}
+                      <Input
+                        required
+                        label="Elitism Count"
+                        type="number"
+                        min={1}
+                        value={gaConfig.elitism_count.toString()}
+                        setValue={(value) =>
+                          onGAConfigChange({ ...gaConfig, elitism_count: parseInt(value) })
+                        }
+                      />
+                    </div>
                   </div>
                 </div>
               </CardContent>
