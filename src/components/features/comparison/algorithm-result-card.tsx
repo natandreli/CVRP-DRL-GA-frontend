@@ -43,7 +43,7 @@ export const AlgorithmResultCard = ({
       </CardHeader>
       <CardContent className="relative space-y-4">
         {/* Metrics */}
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
           <div className={`rounded-lg border ${colors.border} ${colors.bg} p-3`}>
             <div className={`text-xs font-medium ${colors.text}`}>Initial Fitness</div>
             <div className="text-md mt-1 font-bold text-slate-50">
@@ -63,9 +63,21 @@ export const AlgorithmResultCard = ({
             </div>
           </div>
           <div className={`rounded-lg border ${colors.border} ${colors.bg} p-3`}>
-            <div className={`text-xs font-medium ${colors.text}`}>Time (s)</div>
+            <div className={`text-xs font-medium ${colors.text}`}>Total Time (s)</div>
             <div className="text-md mt-1 font-bold text-slate-50">
               {result.computation_time.toFixed(2)}
+            </div>
+          </div>
+          <div className={`rounded-lg border ${colors.border} ${colors.bg} p-3`}>
+            <div className={`text-xs font-medium ${colors.text}`}>Pop. Gen Time (s)</div>
+            <div className="text-md mt-1 font-bold text-slate-50">
+              {result.population_generation_time.toFixed(2)}
+            </div>
+          </div>
+          <div className={`rounded-lg border ${colors.border} ${colors.bg} p-3`}>
+            <div className={`text-xs font-medium ${colors.text}`}>GA Time (s)</div>
+            <div className="text-md mt-1 font-bold text-slate-50">
+              {result.ga_convergence_time.toFixed(2)}
             </div>
           </div>
         </div>
