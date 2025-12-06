@@ -87,7 +87,7 @@ export const Select = ({
           'dark:border-slate-700/50 dark:bg-slate-900',
           'focus:border-slate-600/50 focus:ring-2 focus:ring-slate-900/10 focus:outline-none dark:focus:ring-slate-100/10',
           disabled && 'cursor-not-allowed opacity-60',
-          !disabled && 'hover:border-slate-400 dark:hover:border-slate-600'
+          !disabled && 'cursor-pointer hover:border-slate-400 dark:hover:border-slate-600'
         )}
       >
         <div className="flex-1 truncate">
@@ -138,7 +138,7 @@ export const Select = ({
                     type="button"
                     onClick={() => handleSelect(option.value)}
                     className={cn(
-                      'w-full px-4 py-3 text-left transition-colors',
+                      'w-full cursor-pointer px-4 py-3 text-left transition-colors',
                       'hover:bg-slate-800',
                       option.value === value && 'bg-slate-800/50'
                     )}
