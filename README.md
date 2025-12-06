@@ -75,6 +75,36 @@ src/
 - npm or yarn package manager
 - Backend API running ([see backend README](https://github.com/natandreli/CVRP-DRL-GA-backend.git))
 
+### Installing Node.js
+
+Node.js is a JavaScript runtime needed to run this web application.
+
+#### Step 1: Download and Install Node.js
+
+1. Visit [nodejs.org](https://nodejs.org/)
+2. Download the **LTS (Long Term Support)** version for your operating system
+   - The installer includes npm (Node Package Manager) automatically
+3. Run the installer and follow the installation wizard
+   - Accept default settings
+   - Grant administrator permissions if requested
+
+#### Step 2: Verify Installation
+
+Open a terminal/command prompt and run:
+
+```bash
+node --version
+```
+
+You should see a version number like `v18.x.x` or higher.
+
+Also verify npm is installed:
+```bash
+npm --version
+```
+
+You should see a version number like `9.x.x` or higher.
+
 ### Installation
 
 1. **Clone the repository**
