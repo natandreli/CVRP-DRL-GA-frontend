@@ -234,14 +234,6 @@ The application adapts to different screen sizes:
 - **Tablet**: Stacked layout with preserved features
 - **Mobile**: Single column, optimized controls
 
-## 🎨 Theme
-
-Custom dark theme with:
-- **Primary**: Blue (#3f68f2)
-- **Background**: Dark blue (#090b0d)
-- **Text**: Light slate
-- **Accents**: Cyan, emerald, sky
-
 ## 🐛 Known Issues
 
 - Large instances (>150 customers) may require zoom adjustment for optimal visualization
