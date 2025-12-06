@@ -10,6 +10,8 @@ export interface CVRPInstance {
   vehicle_capacity: number
   max_vehicles?: number
   distance_matrix?: number[][]
+  seed?: number
+  num_clusters?: number
 }
 
 export interface GenerateRandomInstanceRequest {
