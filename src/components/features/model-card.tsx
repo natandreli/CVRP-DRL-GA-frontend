@@ -44,7 +44,7 @@ export const ModelCard = ({ modelId }: { modelId: string }) => {
           >
             <Icon className="h-5 w-5 text-white" />
           </div>
-          {model.id === 'expert' && <IconStar className="h-5 w-5 flex-shrink-0 text-amber-500" />}
+          {model.id === 'mid' && <IconStar className="h-5 w-5 flex-shrink-0 text-amber-500" />}
         </div>
         <CardTitle className="mb-2 text-base leading-tight">
           {model.name}
